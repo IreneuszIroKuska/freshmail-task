@@ -2,12 +2,16 @@ import React from 'react';
 import ThemeProvider from './providers/themeProvider/ThemeProvider';
 import AppProvider from './providers/appProvider/AppProvider';
 import AppRoutes from './routing/AppRoutes';
+import Menu from './components/menu';
+import PageWrapper from './components/pageWrapper';
 
 const App = () => (
   <ThemeProvider>
     <AppProvider>
-    <header> Menu </header>
-      <AppRoutes />
+    <Menu />
+      <PageWrapper>
+        <AppRoutes />
+      </PageWrapper>
     </AppProvider>
   </ThemeProvider>
 )
