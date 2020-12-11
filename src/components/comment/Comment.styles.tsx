@@ -13,7 +13,7 @@ const CommentWrapper = styled.figure`
 
     &:hover {
         transform: scale(1.02);
-        box-shadow: 6px 0px 39px 10px rgba(0,0,0,0.57);
+        box-shadow: 0px 0px 39px 10px rgba(0,0,0,0.53);
     }
 `;
 
