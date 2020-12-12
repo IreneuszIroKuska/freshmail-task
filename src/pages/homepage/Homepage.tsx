@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import HomeContainer from '../../containers/homeContainer';
+import Loader from '../../components/loader';
 import { HomepageWrapper } from './Homepage.styles';
 
 const Homepage = () => (
-    <HomepageWrapper>
-        <HomeContainer />
-    </HomepageWrapper>
+    <Suspense fallback={<Loader />}>
+        <HomepageWrapper>
+            <HomeContainer />
+        </HomepageWrapper>
+    </Suspense>
+
 );
 
 export default Homepage;

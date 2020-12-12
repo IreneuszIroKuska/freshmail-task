@@ -17,6 +17,40 @@ const CommentWrapper = styled.figure`
     }
 `;
 
+const CommentTitle = styled.h3`
+    font-size: 30px;
+`;
+
+const TitleWrapper = styled.div`
+    width: 100%;
+    border-bottom: 1px solid black;
+    padiing-bottom: 5px;
+`;
+
+const ContentWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 90%;
+    margin-top: 10px;
+`;
+
+const Separator = styled.div`
+    font-size: 20px;
+    margin-top: 10px;
+`;
+
+const ContentSeparator = styled(Separator)`
+    font-size: 14px;
+    margin-top: 5px;
+    word-wrap: break-word;
+`;
+
 export {
     CommentWrapper,
+    CommentTitle,
+    TitleWrapper,
+    ContentWrapper,
+    Separator,
+    ContentSeparator,
 };

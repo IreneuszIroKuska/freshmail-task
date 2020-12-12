@@ -1,5 +1,12 @@
 import React, { FC, memo } from 'react';
-import { CommentWrapper } from './Comment.styles';
+import { 
+    CommentWrapper, 
+    CommentTitle, 
+    TitleWrapper,
+    ContentWrapper,
+    Separator,
+    ContentSeparator,
+} from './Comment.styles';
 
 interface props {
     name: string,
@@ -9,9 +16,18 @@ interface props {
 
 const Comment:FC<props> = memo(({ name, email, body}) => (
     <CommentWrapper>
-        <span>{name}</span>
-        <span>{email}</span>
-        <span>{body}</span>
+        <TitleWrapper>
+            <CommentTitle>Comment: </CommentTitle>
+        </TitleWrapper>
+        <ContentWrapper>
+            <Separator>Nick:</Separator>
+            <ContentSeparator>{name.length > 15 ? name.slice(0, 15) : name}</ContentSeparator>
+            <Separator>email:</Separator>
+            <ContentSeparator>{email}</ContentSeparator>
+            <Separator>comment:</Separator>
+            <ContentSeparator>{body ? body.slice(0, 20) : ''}</ContentSeparator>
+        </ContentWrapper>
+
     </CommentWrapper>
 ));
 
