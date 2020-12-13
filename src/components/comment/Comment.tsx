@@ -1,4 +1,5 @@
 import React, { FC, memo } from 'react';
+import AddToFavorite from '../addToFavorite';
 import { 
     CommentWrapper, 
     CommentTitle, 
@@ -9,15 +10,18 @@ import {
 } from './Comment.styles';
 
 interface props {
+    id: number,
     name: string,
     email: string,
     body?: string, 
+    disableCheckbox?: boolean,
 }
 
-const Comment:FC<props> = memo(({ name, email, body}) => (
+const Comment:FC<props> = memo(({ id, name, email, body, disableCheckbox}) => (
     <CommentWrapper>
         <TitleWrapper>
             <CommentTitle>Comment: </CommentTitle>
+            {!disableCheckbox && <AddToFavorite id={id} />}
         </TitleWrapper>
         <ContentWrapper>
             <Separator>Nick:</Separator>

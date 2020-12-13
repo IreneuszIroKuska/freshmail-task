@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { fetchComment } from '../../store/actions/comments/comments.actions';
 import Comment from '../../components/comment';
 import Loader from '../../components/loader';
 
@@ -9,43 +11,44 @@ interface data {
     id: number;
 }
 
+interface props {
+    loading: any;
+    fetchComment: () => {};
+    comments: Array<data>;
+    error: boolean,
+}
+
 const elementMapper = (data:data[]) => {
     return data.map(item => {
         return (
-            <Comment name={item.name} email={item.email} body={item.body} key={item.id} />
+            <Comment id={item.id} name={item.name} email={item.email} body={item.body} key={item.id} />
         )
     })
 }
 
-const HomeContainer = () => {
-    const [data, setData] = useState<data[]>([]);
-    const [isError, setIsError] = useState<boolean>(false);
-    const [isLoaded, setIsLoaded] = useState<boolean>(false);
-
-    const fetchData = () => {
-        fetch('https://jsonplaceholder.typicode.com/comments')
-            .then(data => data.json())
-            .then(data => {
-                setData(data)
-                setIsLoaded(true);
-            })
-            .catch(error => {
-                console.error(error)
-                setIsError(true);
-            });
-    };
+const HomeContainer:FC<props> = ({ fetchComment, loading, comments, error }) => {
+    const loadingState:string = 'LOADING';
+    const isLoading = loading.COMMENTS_GET_REQUEST === loadingState && !comments.length;
 
     useEffect(() => {
-        fetchData()
-    }, [])
+        if(!comments.length) {
+            fetchComment();
+        }
+    }, [fetchComment])
 
-    if(isError) {
+    if(error) {
         return (
-            <div> ...Ooops something went bad</div>
+            <div> ...Ooops something went wrong</div>
         )
     }
 
-    return isLoaded ? elementMapper(data) : <Loader />
+    return !isLoading ? elementMapper(comments) : <Loader />
 }
 
-export default HomeContainer;
+const mapStateToProps = state => ({
+    loading: state.commentsReducer.loadingState,
+    comments: state.commentsReducer.comments,
+    error: state.commentsReducer.error,
+});
+
+export default connect(mapStateToProps, { fetchComment })(HomeContainer);

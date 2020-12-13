@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { 
     StyledHeader, 
@@ -12,9 +13,14 @@ import {
 
 import { AppRoutes } from '../../routing/AppRoutes.enum';
 
-const Menu = () => {
+interface props {
+    favorite: Array<any>;
+}
+
+const Menu:FC<props> = ({ favorite }) => {
     const currentPath = useLocation();
     const isCurrentPath = (path: string) => currentPath.pathname === path;
+    const likedElementsCount = favorite.favorite.length ? favorite.favorite.length : '0';
 
     return (
         <StyledHeader>
@@ -23,7 +29,7 @@ const Menu = () => {
                         <Link to={AppRoutes.home}>Home</Link>                        
                     </StyledListElement>
                     <StyledDropdown isCurrentPath={isCurrentPath(AppRoutes.favorite)}>
-                        <Link to={AppRoutes.favorite}>ulubione</Link>
+                        <Link to={AppRoutes.favorite}>ulubione: {likedElementsCount}</Link>
                         <StyledSubitem>
                             <StyledSubListElement isCurrentPath={isCurrentPath(AppRoutes.addNewComment)}>
                                 <Link to={AppRoutes.addNewComment}>Dodaj nowy komentarz</Link>
@@ -38,4 +44,8 @@ const Menu = () => {
     )
 };
 
-export default Menu;
+const mapStateToProps = state => ({
+    favorite: state.favorite,
+});
+
+export default connect(mapStateToProps, {})(Menu);
