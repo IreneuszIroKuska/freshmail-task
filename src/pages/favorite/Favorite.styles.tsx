@@ -13,14 +13,7 @@ const StyledFigure = styled.figure`
     margin-right: 12px;
 `;
 
-const StyledButton = styled.button`
-    margin-top: 10px;
-    padding: 25px;
-    border-radius: 12px;
-`
-
 export { 
     FavoriteWrapper,
     StyledFigure,
-    StyledButton,
 }

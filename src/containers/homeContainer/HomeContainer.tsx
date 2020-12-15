@@ -19,11 +19,16 @@ interface props {
 }
 
 const elementMapper = (data:data[]) => {
-    return data.map(item => {
-        return (
-            <Comment id={item.id} name={item.name} email={item.email} body={item.body} key={item.id} />
-        )
-    })
+    if (data) {
+        const sliceStart = data.length - 20;
+        const sliceEnd = data.length;
+        return data.slice(sliceStart, sliceEnd).map(item => {
+            return (
+                <Comment id={item.id} name={item.name} email={item.email} body={item.body} key={item.id} />
+            )
+        })
+    }
+    return <></>
 }
 
 const HomeContainer:FC<props> = ({ fetchComment, loading, comments, error }) => {
@@ -38,7 +43,7 @@ const HomeContainer:FC<props> = ({ fetchComment, loading, comments, error }) => 
 
     if(error) {
         return (
-            <div> ...Ooops something went wrong</div>
+            <div>...Ooops something went wrong</div>
         )
     }
 
