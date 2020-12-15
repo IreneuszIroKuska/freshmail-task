@@ -8,6 +8,7 @@ const StyledHeader = styled.header`
     display: flex;
     align-items: center;
     min-height: 100px;
+    background-color: ${({ theme }) => theme.colors.white};
 `;
 
 const StyledList = styled.ul`
@@ -33,7 +34,7 @@ const StyledListElement = styled.li<props>`
         height: 100%;
         width: 100%;
         text-decoration: none;
-        color: black;
+        color: ${({ theme }) => theme.colors.black};
     }
 
     &:hover {
@@ -65,7 +66,7 @@ const StyledSubitem = styled(StyledList)`
     transition: opacity .3s;
     background-color: white;
     border: 1px solid black;
-    border-radius: 12px;
+    border-radius: ${({ theme }) => theme.radius.siteRadius};    
 `;
 
 const StyledSubListElement = styled(StyledListElement)`

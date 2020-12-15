@@ -1,15 +1,15 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import Button from '../../components/Button';
+import StyledInput from '../../components/styledInput'
+import Button from '../../components/button';
 import { useSelector, useDispatch } from 'react-redux';
 import { addComment } from '../../store/actions/comments/comments.actions';
 import { 
     StyledForm,
-    StyledInput,
     StyledWrapper,
     StyledTitle,
     StyledTextarea,
- } from './AddNewComment.styles';
+} from './AddNewComment.styles';
 
 type Inputs = {
     name: string,
@@ -67,7 +67,7 @@ const AddNewComment = () => {
                 {errors.email && <span>{errorHandler(errors.email.type)}</span>}
                 <StyledTextarea placeholder="text" name="text" rows={10} cols={30} ref={register({ required: true, minLength: 2})} />
                 {errors.name && <span>{errorHandler(errors.name.type)}</span>}
-                <Button type="submit">Send</Button>
+                <Button type="submit" value="send" />
             </StyledForm>
         </StyledWrapper>
     )}

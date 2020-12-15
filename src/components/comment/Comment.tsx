@@ -21,7 +21,7 @@ const Comment:FC<props> = memo(({ id, name, email, body, disableCheckbox}) => (
     <CommentWrapper>
         <TitleWrapper>
             <CommentTitle>Comment: </CommentTitle>
-            {!disableCheckbox && <AddToFavorite id={id} />}
+            Dodaj do ulubionych: {!disableCheckbox && <AddToFavorite id={id} />}
         </TitleWrapper>
         <ContentWrapper>
             <Separator>Nick:</Separator>

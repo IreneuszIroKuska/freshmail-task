@@ -6,9 +6,9 @@ const CommentWrapper = styled.figure`
     align-items: center;
     width: 200px;
     height: 200px;
-    background-color: blue;
+    background-color: ${({ theme }) => theme.colors.blue};
     padding: 8px;
-    border-radius: 12px;
+    border-radius: ${({ theme }) => theme.radius.siteRadius};
     transition: all .3s;
 
     &:hover {
@@ -19,12 +19,14 @@ const CommentWrapper = styled.figure`
 
 const CommentTitle = styled.h3`
     font-size: 30px;
+    color: ${({ theme }) => theme.colors.white};
 `;
 
 const TitleWrapper = styled.div`
     width: 100%;
     border-bottom: 1px solid black;
-    padiing-bottom: 5px;
+    padding-bottom: 5px;
+    color: ${({ theme }) => theme.colors.orange};
 `;
 
 const ContentWrapper = styled.div`
@@ -37,12 +39,15 @@ const ContentWrapper = styled.div`
 
 const Separator = styled.div`
     font-size: 20px;
-    margin-top: 10px;
+    margin-top: 5px;
+    font-weight: 900;
+    color: ${({ theme }) => theme.colors.white};
 `;
 
 const ContentSeparator = styled(Separator)`
     font-size: 14px;
     margin-top: 5px;
+    font-weight: 400;
     word-wrap: break-word;
 `;
 

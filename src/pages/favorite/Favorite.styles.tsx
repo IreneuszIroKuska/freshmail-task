@@ -10,6 +10,7 @@ const FavoriteWrapper = styled.div`
 const StyledFigure = styled.figure`
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin-right: 12px;
 `;
 

@@ -10,18 +10,14 @@ export const fetchComment = () => {
 };
 
 export const addComment = ({ name, email, text }, id) => {
-    // const promise = fetch('https://jsonplaceholder.typicode.com/comments');
-
-    console.info(id, 'id from acttion')
-
     const promise = fetch('https://jsonplaceholder.typicode.com/comments', {
-    method: 'POST',
-    body: JSON.stringify({
-        postId: 100,
-        id: `${id}`,
-        name: `${name}`,
-        email: `${email}`,
-        body: `${text}`,
+        method: 'POST',
+        body: JSON.stringify({
+            postId: 100,
+            id: `${id}`,
+            name: `${name}`,
+            email: `${email}`,
+            body: `${text}`,
     }),
 
     headers: {

@@ -1,17 +1,13 @@
 // eslint-disable-next-line
 export default {
     colors: {
-        blue: '#2A8BCA',
-        gold: '#CBC4A7',
-        gray: '#E5E5E5',
-        gray_dark: '#36383E',
-        white: '#ffffff',
+       white: '#ffffff',
+       blue: '#4460f7',
+       gray: '#f0f1f5',
+       orange: '#f9a52b',
+       black: '#000000',
     },
-    breakpoints: {
-        mobile: '350px',
-        tablet: '767px',
-        tablet_big: '1024px',
-        desktop: '1360px',
-        desktop_big: '1600px',
+    radius: {
+        siteRadius: '8px',
     }
 };

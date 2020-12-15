@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
-import Button from '../../components/Button';
+import Button from '../../components/button';
 import Comment from '../../components/comment';
 import { removeFavorite } from '../../store/actions/favortie/favorite.actions';
 import { FavoriteWrapper, StyledFigure } from './Favorite.styles';
@@ -16,7 +16,7 @@ const elementMapper = (data:data[], callback) => {
         return (
             <StyledFigure key={item.id}>
                 <Comment id={item.id} name={item.name} email={item.email} body={item.body} disableCheckbox />
-                <Button onClick={() => callback(item.id)}> remove item </Button>
+                <Button value="remove" onClick={() => callback(item.id)} />
             </StyledFigure>
         )
     })

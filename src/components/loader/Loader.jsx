@@ -7,7 +7,7 @@ const rotate = keyframes`
 `;
 
 const LoaderElement = styled.div`
-  border: 4px solid ${({ theme }) => theme.colors.gold};
+  border: 4px solid ${({ theme }) => theme.colors.orange};
   border-radius: 50%;
   border-top: 4px solid #4460F7;
   width: 56px;
