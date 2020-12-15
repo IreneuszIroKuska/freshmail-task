@@ -1,17 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-/*
-    Strona: Filtr
-zawiera formularz z polami: litery(a-Z), tekst(a-Z [Spacja]),
- select(Usuń/Pozostaw), przycisk Filtruj
-użytkownik wypełnia formularz, po użyciu Filtruj, 
-    zależnie od wybranej opcji (Usuń, Pozostaw) skrypt usunie, 
-    lub pozostawi z tekstu wszystkie litery użyte w polu “litery” 
-Przykład użytkownik wpisał w polu znaki: “asiwt” i w polu tekst: 
-“FreshMail” w selecie wybrał “Usuń” kod zwróci “FrehMl” 
-*/
-
 const removeCharactersFromString=(removalName: string, originalName:string)=>removalName
     .split('')
     .reduce((item, el)=>item.replace(el,''),originalName);
