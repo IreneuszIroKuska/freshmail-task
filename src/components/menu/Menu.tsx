@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { connect } from 'react-redux';
-
+import { useSelector } from 'react-redux';
+import { AppRoutes } from '../../routing/AppRoutes.enum';
 import { 
     StyledHeader, 
     StyledList, 
@@ -11,13 +11,15 @@ import {
     StyledSubListElement, 
 } from './Menu.styles';
 
-import { AppRoutes } from '../../routing/AppRoutes.enum';
 
-interface props {
-    favorite: Array<any>;
-}
+const HOME = 'Strona Główna';
+const FAVORITE = 'Ulubione ';
+const ADD_COMMENT = 'Dodaj nowy komentarz';
+const FILTER = 'Filtruj';
 
-const Menu:FC<props> = ({ favorite }) => {
+
+const Menu = () => {
+    const favorite = useSelector(store => store.favorite);
     const currentPath = useLocation();
     const isCurrentPath = (path: string) => currentPath.pathname === path;
     const likedElementsCount = favorite.favorite.length ? favorite.favorite.length : '0';
@@ -26,26 +28,22 @@ const Menu:FC<props> = ({ favorite }) => {
         <StyledHeader>
                 <StyledList>
                     <StyledListElement isCurrentPath={isCurrentPath(AppRoutes.home)}>
-                        <Link to={AppRoutes.home}>Home</Link>                        
+                        <Link to={AppRoutes.home}>{HOME}</Link>                        
                     </StyledListElement>
                     <StyledDropdown isCurrentPath={isCurrentPath(AppRoutes.favorite)}>
-                        <Link to={AppRoutes.favorite}>ulubione: {likedElementsCount}</Link>
+                        <Link to={AppRoutes.favorite}>{FAVORITE}{likedElementsCount}</Link>
                         <StyledSubitem>
                             <StyledSubListElement isCurrentPath={isCurrentPath(AppRoutes.addNewComment)}>
-                                <Link to={AppRoutes.addNewComment}>Dodaj nowy komentarz</Link>
+                                <Link to={AppRoutes.addNewComment}>{ADD_COMMENT}</Link>
                             </StyledSubListElement>
                         </StyledSubitem>
                     </StyledDropdown>
                     <StyledListElement isCurrentPath={isCurrentPath(AppRoutes.filter)}>
-                        <Link to={AppRoutes.filter}>Filtr</Link>
+                        <Link to={AppRoutes.filter}>{FILTER}</Link>
                     </StyledListElement>
                 </StyledList>
         </StyledHeader>
     )
 };
 
-const mapStateToProps = state => ({
-    favorite: state.favorite,
-});
-
-export default connect(mapStateToProps, {})(Menu);
+export default Menu;

@@ -1,30 +1,31 @@
 import React, { FC, useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addToFavoriteAction, removeFavorite } from '../../store/actions/favortie/favorite.actions'
 
 interface props {
     id: number;
-    addToFavoriteAction: (id: number) => {};
-    removeFavorite: (id: number) => {};
+    text?: string;
 }
 
-const AddToFavorite:FC<props> = ({ id, addToFavoriteAction, removeFavorite }) => {
+const AddToFavorite:FC<props> = ({ id, text }) => {
     const [checked, setChecked] = useState<boolean>(false);
+    const dispatch = useDispatch();
+
     const handleChange = () => {
         setChecked(!checked);
         if (!checked) {
-            addToFavoriteAction(id)
+            dispatch(addToFavoriteAction(id));
         } else {
-            removeFavorite(id)
+            dispatch(removeFavorite(id));
         }
     }
 
     return (
-        <input type="checkbox" checked={checked} onChange={handleChange} />
+        <>  
+            {text}
+            <input type="checkbox" checked={checked} onChange={handleChange} />
+        </>
     )
 }
 
-export default connect(null, {
-    addToFavoriteAction, 
-    removeFavorite,
-})(AddToFavorite);
+export default AddToFavorite;

@@ -9,6 +9,11 @@ import {
     ContentSeparator,
 } from './Comment.styles';
 
+const TEXT = "Dodaj do ulubionych: ";
+const COMMENT = "Komentarz: ";
+const NICK = 'Nazwa:';
+const EMAIL = 'Email';
+
 interface props {
     id: number,
     name: string,
@@ -20,18 +25,17 @@ interface props {
 const Comment:FC<props> = memo(({ id, name, email, body, disableCheckbox}) => (
     <CommentWrapper>
         <TitleWrapper>
-            <CommentTitle>Comment: </CommentTitle>
-            Dodaj do ulubionych: {!disableCheckbox && <AddToFavorite id={id} />}
+            <CommentTitle>{COMMENT}</CommentTitle>
+            {!disableCheckbox && <AddToFavorite id={id} text={TEXT} />}
         </TitleWrapper>
         <ContentWrapper>
-            <Separator>Nick:</Separator>
+            <Separator>{NICK}</Separator>
             <ContentSeparator>{name.length > 15 ? name.slice(0, 15) : name}</ContentSeparator>
-            <Separator>email:</Separator>
+            <Separator>{EMAIL}</Separator>
             <ContentSeparator>{email}</ContentSeparator>
-            <Separator>comment:</Separator>
+            <Separator>{COMMENT}</Separator>
             <ContentSeparator>{body ? body.slice(0, 20) : ''}</ContentSeparator>
         </ContentWrapper>
-
     </CommentWrapper>
 ));
 

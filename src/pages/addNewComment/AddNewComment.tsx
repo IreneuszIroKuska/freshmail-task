@@ -1,8 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useSelector, useDispatch } from 'react-redux';
 import StyledInput from '../../components/styledInput'
 import Button from '../../components/button';
-import { useSelector, useDispatch } from 'react-redux';
 import { addComment } from '../../store/actions/comments/comments.actions';
 import { 
     StyledForm,
@@ -10,6 +10,8 @@ import {
     StyledTitle,
     StyledTextarea,
 } from './AddNewComment.styles';
+
+const TEXT = 'Dodaj nowy komentarz';
 
 type Inputs = {
     name: string,
@@ -45,12 +47,14 @@ const errorHandler = (error: string) => {
 }
 
 const AddNewComment = () => {
-    const { register, handleSubmit, watch, errors } = useForm<Inputs>();
+    const { register, handleSubmit, errors } = useForm<Inputs>();
     const dispatch = useDispatch()
-    const count = useSelector(store => store.commentsReducer.comments);
+    const commentsData = useSelector(store => store.commentsReducer);
+    const count = commentsData.comments.length || 0;
 
     const onSubmit = data => {
-        const lastElementId = count.length ? count[count.length - 1].id : 501;
+        // id nie działa poniewa serwer zwraca fake, który zawsze zwraca 501
+        const lastElementId = count ? count[count - 1].id : 501;
         const id = lastElementId ? lastElementId + 1 : 501;
         if (data) {
             dispatch(addComment(data, id));
@@ -59,13 +63,29 @@ const AddNewComment = () => {
 
     return (
         <StyledWrapper>
-            <StyledTitle> Add new comment </StyledTitle>
+            <StyledTitle>{TEXT}</StyledTitle>
             <StyledForm onSubmit={handleSubmit(onSubmit)}>
-                <StyledInput type="text" placeholder="name" name="name" ref={register({required: true, minLength: 3, pattern: /^[a-zA-Z]+$/})} />
+                <StyledInput type="text" 
+                             placeholder="name" 
+                             name="name" 
+                             ref={register(
+                                 {required: true, minLength: 3, pattern: /^[a-zA-Z]+$/}
+                                )} />
                 {errors.name && <span>{errorHandler(errors.name.type)}</span>}
-                <StyledInput type="email" placeholder="email" name="email" ref={register({required: true, pattern: /^\S+@\S+$/i})}/>
+                <StyledInput type="email" 
+                             placeholder="email" 
+                             name="email" 
+                             ref={register(
+                                 {required: true, pattern: /^\S+@\S+$/i}
+                                )}/>
                 {errors.email && <span>{errorHandler(errors.email.type)}</span>}
-                <StyledTextarea placeholder="text" name="text" rows={10} cols={30} ref={register({ required: true, minLength: 2})} />
+                <StyledTextarea placeholder="text" 
+                                name="text" 
+                                rows={10} 
+                                cols={30} 
+                                ref={register(
+                                    {required: true, minLength: 2}
+                                    )} />
                 {errors.name && <span>{errorHandler(errors.name.type)}</span>}
                 <Button type="submit" value="send" />
             </StyledForm>

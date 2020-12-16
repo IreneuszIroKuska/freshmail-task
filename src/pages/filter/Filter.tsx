@@ -4,6 +4,16 @@ import StyledInput from '../../components/styledInput'
 import Button from '../../components/button';
 import { StyledForm, StyledSelect, StyledGroup } from './Filter.styles';
 
+enum errorText {
+    errorLetters = 'Wpisałeś nie prawidłowe dane, wpisz tylko małe lub duze litery',
+    errorTexts = 'Wpisałeś nie prawidłowe dane, wpisz tylko małe lub duze litery oraz spacje',
+}
+
+enum filterText {
+    remove = 'usuń',
+    stay = 'pozostaw',
+}
+
 const removeCharactersFromString=(removalName: string, originalName:string)=>removalName
     .split('')
     .reduce((item, el)=>item.replace(el,''),originalName);
@@ -31,7 +41,7 @@ const Filter = () => {
                          ref={register({
                             pattern: /^[a-zA-Z]+$/
                         })}></StyledInput>
-            {errors.letters && <span>Wpisałeś nie prawidłowe dane, wpisz tylko małe lub duze litery</span>}            
+            {errors.letters && <span>{errorText.errorLetters}</span>}            
             <StyledInput placeholder="text" 
                          name="text" 
                          type="text" 
@@ -41,11 +51,11 @@ const Filter = () => {
                              pattern:  /^[a-zA-Z\s]*$/
                         })}>
             </StyledInput>
-            {errors.text && <span>Wpisałeś nie prawidłowe dane, wpisz tylko małe lub duze litery oraz spacje</span>}            
+            {errors.text && <span>{errorText.errorTexts}</span>}            
             <StyledGroup>
                 <StyledSelect name="type" ref={register({ required: true })}>
-                    <option value="remove">Usuń</option>
-                    <option value="stay">Pozostaw</option>
+                    <option value="remove">{filterText.remove}</option>
+                    <option value="stay">{filterText.stay}</option>
                 </StyledSelect>
                 <Button type="submit" value="Filtruj"></Button>
             </StyledGroup>

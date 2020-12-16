@@ -1,5 +1,5 @@
-import React, { FC, useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { fetchComment } from '../../store/actions/comments/comments.actions';
 import Comment from '../../components/comment';
 import Loader from '../../components/loader';
@@ -11,34 +11,35 @@ interface data {
     id: number;
 }
 
-interface props {
-    loading: any;
-    fetchComment: () => {};
-    comments: Array<data>;
-    error: boolean,
-}
-
 const elementMapper = (data:data[]) => {
     if (data) {
         const sliceStart = data.length - 20;
         const sliceEnd = data.length;
         return data.slice(sliceStart, sliceEnd).map(item => {
             return (
-                <Comment id={item.id} name={item.name} email={item.email} body={item.body} key={item.id} />
+                <><Comment id={item.id} name={item.name} email={item.email} body={item.body} key={item.id} /></>
             )
         })
     }
     return <></>
 }
 
-const HomeContainer:FC<props> = ({ fetchComment, loading, comments, error }) => {
+const HomeContainer = () => {
+    const commentsData = useSelector(store => store.commentsReducer);
+    const comments = commentsData.comments;
+    const loading = commentsData.loadingState;
+    const error = commentsData.error;
+
+    const dispatch = useDispatch();
     const loadingState:string = 'LOADING';
     const isLoading = loading.COMMENTS_GET_REQUEST === loadingState && !comments.length;
 
     useEffect(() => {
         if(!comments.length) {
-            fetchComment();
+            dispatch(fetchComment());
         }
+
+        return () => {}
     }, [fetchComment])
 
     if(error) {
@@ -50,10 +51,4 @@ const HomeContainer:FC<props> = ({ fetchComment, loading, comments, error }) => 
     return !isLoading ? elementMapper(comments) : <Loader />
 }
 
-const mapStateToProps = state => ({
-    loading: state.commentsReducer.loadingState,
-    comments: state.commentsReducer.comments,
-    error: state.commentsReducer.error,
-});
-
-export default connect(mapStateToProps, { fetchComment })(HomeContainer);
+export default HomeContainer;

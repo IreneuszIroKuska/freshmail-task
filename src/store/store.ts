@@ -3,7 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { promiseMiddleware } from './middleware/promise.middleware';
 import rootReducer from './reducers'
 
-export default function configureStore(preloadedState: any) {
+export default function configureStore(preloadedState?: any) {
   const middlewares = [promiseMiddleware];
   const middlewareEnhancer = applyMiddleware(...middlewares)
 
