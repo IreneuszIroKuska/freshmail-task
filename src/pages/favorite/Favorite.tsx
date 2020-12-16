@@ -11,7 +11,7 @@ interface props {
     removeFavorite: (id: number) => {};
 }
 
-const elementMapper = (data:data[], callback) => {
+const elementMapper = (data, callback) => {
     return data.map(item => {
         return (
             <StyledFigure key={item.id}>

@@ -14,8 +14,8 @@ interface data {
 
 const elementMapper = (data:data[]) => {
     if (data) {
-        const sliceStart = data.length - 20;
-        const sliceEnd = data.length;
+        const sliceStart: number = data.length - 20;
+        const sliceEnd: number = data.length;
         return data.slice(sliceStart, sliceEnd).map(item => {
             return (
                 <Comment id={item.id} name={item.name} email={item.email} body={item.body} key={item.id} />
@@ -33,7 +33,7 @@ const HomeContainer = () => {
 
     const dispatch = useDispatch();
     const loadingState:string = 'LOADING';
-    const isLoading = loading.COMMENTS_GET_REQUEST === loadingState && !comments.length;
+    const isLoading:boolean = loading.COMMENTS_GET_REQUEST === loadingState && !comments.length;
 
     useEffect(() => {
         if(!comments.length) {

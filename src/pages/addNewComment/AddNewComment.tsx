@@ -50,12 +50,12 @@ const AddNewComment = () => {
     const { register, handleSubmit, errors } = useForm<Inputs>();
     const dispatch = useDispatch()
     const commentsData = useSelector(store => store.commentsReducer);
-    const count = commentsData.comments.length || 0;
+    const count: number = commentsData.comments.length || 0;
 
     const onSubmit = data => {
         // id nie działa poniewa serwer zwraca fake, który zawsze zwraca 501
-        const lastElementId = count ? count[count - 1].id : 501;
-        const id = lastElementId ? lastElementId + 1 : 501;
+        const lastElementId: number = count ? count[count - 1].id : 501;
+        const id: number = lastElementId ? lastElementId + 1 : 501;
         if (data) {
             dispatch(addComment(data, id));
         }

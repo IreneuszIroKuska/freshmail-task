@@ -9,10 +9,10 @@ import {
     ContentSeparator,
 } from './Comment.styles';
 
-const TEXT = "Dodaj do ulubionych: ";
-const COMMENT = "Komentarz: ";
-const NICK = 'Nazwa:';
-const EMAIL = 'Email';
+const TEXT: string = "Dodaj do ulubionych: ";
+const COMMENT: string = "Komentarz: ";
+const NICK: string = 'Nazwa:';
+const EMAIL: string = 'Email';
 
 interface props {
     id: number,

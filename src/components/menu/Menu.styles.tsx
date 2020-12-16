@@ -4,6 +4,10 @@ interface props {
     isCurrentPath: boolean;
 }
 
+interface isOpen {
+    isOpen: boolean;
+}
+
 const StyledHeader = styled.header`
     display: flex;
     align-items: center;
@@ -44,13 +48,17 @@ const StyledListElement = styled.li<props>`
     } 
 `;
 
-const StyledDropdown = styled(StyledListElement)`
+const StyledDropdown = styled(StyledListElement)<isOpen>`
     position: relative;
     flex-direction: column;
+    background-color: ${({ theme }) => theme.colors.white};
+
+    ul {
+        display: ${({ isOpen }) => isOpen ? 'flex' : ''};
+    }
 
     &:hover {
         > ul {
-            display: flex;
             justify-content: center;
             align-items: center;
             width: 100%;
@@ -60,6 +68,22 @@ const StyledDropdown = styled(StyledListElement)`
             }
         }
     }
+`;
+
+const DropdownWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+const StyledArrow = styled.span<isOpen>`
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transition: transform .3s;
+    margin-right: 3px;
+    transform: ${({ isOpen }) => isOpen ? 'rotate(45deg)' : 'rotate(-135deg)'};
 `
 
 const StyledSubitem = styled(StyledList)`
@@ -94,4 +118,6 @@ export {
     StyledSubitem,
     StyledDropdown,
     StyledSubListElement,
+    StyledArrow,
+    DropdownWrapper,
 };

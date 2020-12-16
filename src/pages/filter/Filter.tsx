@@ -25,6 +25,7 @@ const Filter = () => {
         const type = data.type;
         const removeText = data.letters
         const originalText = data.text
+        
         if (type === 'remove') {
             setTextValue(removeCharactersFromString(removeText, originalText))
         } else {
