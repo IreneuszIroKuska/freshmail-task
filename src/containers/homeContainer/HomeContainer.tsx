@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import WithErrorBoundary from '../../hoc/withErrorBoundary';
 import { fetchComment } from '../../store/actions/comments/comments.actions';
 import Comment from '../../components/comment';
 import Loader from '../../components/loader';
@@ -51,4 +52,4 @@ const HomeContainer = () => {
     return !isLoading ? elementMapper(comments) : <Loader />
 }
 
-export default HomeContainer;
+export default WithErrorBoundary(HomeContainer);

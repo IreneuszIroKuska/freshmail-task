@@ -1,4 +1,5 @@
 import React from 'react';
+import WithErrorBoundary from './hoc/withErrorBoundary';
 import StoreProvider from './providers/storeProvider/StoreProvider';
 import ThemeProvider from './providers/themeProvider/ThemeProvider';
 import AppProvider from './providers/appProvider/AppProvider';
@@ -19,4 +20,4 @@ const App = () => (
   </StoreProvider>
 )
 
-export default App;
+export default WithErrorBoundary(App);
