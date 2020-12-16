@@ -18,7 +18,7 @@ const elementMapper = (data:data[]) => {
         const sliceEnd = data.length;
         return data.slice(sliceStart, sliceEnd).map(item => {
             return (
-                <><Comment id={item.id} name={item.name} email={item.email} body={item.body} key={item.id} /></>
+                <Comment id={item.id} name={item.name} email={item.email} body={item.body} key={item.id} />
             )
         })
     }
