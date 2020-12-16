@@ -34,7 +34,10 @@ const Menu = () => {
                         <Link to={AppRoutes.favorite}>{FAVORITE}{likedElementsCount}</Link>
                         <StyledSubitem>
                             <StyledSubListElement isCurrentPath={isCurrentPath(AppRoutes.addNewComment)}>
-                                <Link to={AppRoutes.addNewComment}>{ADD_COMMENT}</Link>
+                                <Link style={{ fontWeight: isCurrentPath ? 700 : 400}} 
+                                      to={AppRoutes.addNewComment}>
+                                        {ADD_COMMENT}
+                                </Link>
                             </StyledSubListElement>
                         </StyledSubitem>
                     </StyledDropdown>

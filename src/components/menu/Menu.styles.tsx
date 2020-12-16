@@ -54,6 +54,10 @@ const StyledDropdown = styled(StyledListElement)`
             justify-content: center;
             align-items: center;
             width: 100%;
+
+            a {
+                font-weight: 400;
+            }
         }
     }
 `
@@ -66,12 +70,21 @@ const StyledSubitem = styled(StyledList)`
     transition: opacity .3s;
     background-color: white;
     border: 1px solid black;
-    border-radius: ${({ theme }) => theme.radius.siteRadius};    
+    border-radius: ${({ theme }) => theme.radius.siteRadius};
+    
+    li {
+        a {
+            &:hover { 
+                font-weight: 700;
+            }
+        }
+    }
 `;
 
 const StyledSubListElement = styled(StyledListElement)`
     width: 110px;
     padding: 20px;
+    font-weight:${({ isCurrentPath }) => isCurrentPath ? 700 : 400} !important;    
 `;
 
 export {
